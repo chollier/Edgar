@@ -80,7 +80,7 @@
 
 -(void)promptForNewClient:(id)sender
 {
-	console.log("prout");
+	//console.log("prout");
 	var clientWindow = [NewClientWindow sharedNewClientWindow];
 	[clientWindow makeKeyAndOrderFront:self];
 }
