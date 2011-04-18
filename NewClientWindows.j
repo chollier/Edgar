@@ -36,12 +36,13 @@ var SharedClientWindow = nil;
 
 - (id)initWithContentRect:(CGRect)aRect styleMask:(unsigned)aMask
 {
-	console.log("new client window init");
 	
-    if (self = [super initWithContentRect:aRect styleMask:0])
+    if (self = [super initWithContentRect:aRect styleMask:aMask])
     {
+		//console.log("new client window init");
+	
         [self center];
-        [self setMovableByWindowBackground:YES];
+        //[self setMovableByWindowBackground:YES];
         [cancelButton setKeyEquivalent:CPEscapeFunctionKey];
     }
 
@@ -57,7 +58,7 @@ var SharedClientWindow = nil;
 
 -(@action)addButtonPressed:(id)sender 
 {
-	
+	console.log("add pressed");
 }
 
 /*- (@action)addRepository:(id)sender
