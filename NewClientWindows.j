@@ -1,7 +1,7 @@
 @import <Foundation/CPObject.j>
 @import "DatePicker/DatePicker.j"
 
-//var SharedClientWindow = nil;
+var SharedClientWindow = nil;
 
 @implementation NewClientWindow : CPWindow
 {
@@ -21,20 +21,23 @@
     @outlet CPButton    cancelButton;
 }
 
-//+ (id)sharedNewRepoWindow
-//{
-//    return SharedClientWindow;
-//}
++ (id)sharedNewClientWindow
+{
+   return SharedClientWindow;
+}
 
 - (void)awakeFromCib
 {
-//    SharedClientWindow = self;
+	console.log("new client window woke up");
+   SharedClientWindow = self;
     [super awakeFromCib];
 //    [identifierField setValue:[CPColor grayColor] forThemeAttribute:"text-color" inState:CPTextFieldStatePlaceholder];
 }
 
 - (id)initWithContentRect:(CGRect)aRect styleMask:(unsigned)aMask
 {
+	console.log("new client window init");
+	
     if (self = [super initWithContentRect:aRect styleMask:0])
     {
         [self center];

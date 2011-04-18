@@ -1,5 +1,7 @@
 @import <AppKit/CPButtonBar.j>
 @import "ClientView.j"
+@import "NewClientWindows.j"
+
 
 @implementation ClientViewController : CPViewController
 {
@@ -78,7 +80,9 @@
 
 -(void)promptForNewClient:(id)sender
 {
-	return [[NewClientWindow alloc] init];
+	console.log("prout");
+	var clientWindow = [NewClientWindow sharedNewClientWindow];
+	[clientWindow makeKeyAndOrderFront:self];
 }
 
 -(void)addClient:(id)sender
