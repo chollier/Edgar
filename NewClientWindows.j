@@ -1,30 +1,37 @@
 @import <Foundation/CPObject.j>
+@import "DatePicker/DatePicker.j"
 
-var SharedRepoWindow = nil;
+//var SharedClientWindow = nil;
 
-@implementation NewRepoWindow : CPWindow
+@implementation NewClientWindow : CPWindow
 {
-    @outlet CPTextField identifierField @accessors;
-    @outlet RepositoriesController repoController;
+    @outlet CPTextField nom @accessors;
+    @outlet CPTextField prenom @accessors;
+    @outlet DatePicker datedenaissance @accessors;
+    @outlet CPTextField telephone @accessors;
+    @outlet CPTextField email @accessors;
+    @outlet CPTextField adresse @accessors;
+    @outlet CPTextField codepostal @accessors;
+    @outlet CPTextField ville @accessors;
 
-    @outlet CPButton    defaultButton;
+
+    @outlet ClientsController clientsController;
+
+    @outlet CPButton    addButton;
     @outlet CPButton    cancelButton;
 }
 
-+ (id)sharedNewRepoWindow
-{
-    return SharedRepoWindow;
-}
+//+ (id)sharedNewRepoWindow
+//{
+//    return SharedClientWindow;
+//}
 
 - (void)awakeFromCib
 {
-    SharedRepoWindow = self;
+//    SharedClientWindow = self;
     [super awakeFromCib];
-    [identifierField setValue:[CPColor grayColor] forThemeAttribute:"text-color" inState:CPTextFieldStatePlaceholder];
+//    [identifierField setValue:[CPColor grayColor] forThemeAttribute:"text-color" inState:CPTextFieldStatePlaceholder];
 }
-
-
-
 
 - (id)initWithContentRect:(CGRect)aRect styleMask:(unsigned)aMask
 {
@@ -41,36 +48,16 @@ var SharedRepoWindow = nil;
 - (@action)orderFront:(id)sender
 {
     [super orderFront:sender];
-    [errorMessageField setHidden:YES];
-    [progressIndicator setHidden:YES];
+    [nom setStringValue:""];
+    [addButton setEnabled:NO];
 }
 
-- (void)controlTextDidChange:(CPNotification)aNote
+-(@action)addButtonPressed:(id)sender 
 {
-    if ([aNote object] !== identifierField)
-        return;
-
-    if (![identifierField stringValue])
-        [defaultButton setEnabled:NO];
-    else
-        [defaultButton setEnabled:YES];
+	
 }
 
-- (@action)orderFront:(id)sender
-{
-    [super orderFront:sender];
-    [identifierField setStringValue:""];
-    [defaultButton setEnabled:NO];
-}
-
-
-- (void)setDefaultButton:(CPButton)aButton
-{
-    [super setDefaultButton:aButton];
-    defaultButton = aButton;
-}
-
-- (@action)addRepository:(id)sender
+/*- (@action)addRepository:(id)sender
 {
     var repoIdentifier = [identifierField stringValue];
     if (!repoIdentifier)
@@ -102,12 +89,12 @@ var SharedRepoWindow = nil;
     [progressIndicator setHidden:NO];
     [defaultButton setEnabled:NO];
     [cancelButton setEnabled:NO];
-}
+}*/
 
 - (void)sendEvent:(CPEvent)anEvent
 {
     if ([anEvent type] === CPKeyUp && [anEvent keyCode] === CPTabKeyCode)
-        [self makeFirstResponder:identifierField];
+        [self makeFirstResponder:nom];
     else
         [super sendEvent:anEvent];
 }

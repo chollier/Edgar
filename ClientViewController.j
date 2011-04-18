@@ -35,7 +35,7 @@
 - (void) awakeFromCib
 {
 	var addButton = [CPButtonBar plusButton];
-	[addButton setAction:@selector(addClient:)];
+	[addButton setAction:@selector(promptForNewClient:)];
 	[addButton setTarget:self];
 	[addButton setEnabled:YES];
 
@@ -74,6 +74,11 @@
 /*	[[[clientListView enclosingScrollView] superview] setBackgroundColor:[CPColor colorWithHexString:@"eef2f8"]];*/
 
 
+}
+
+-(void)promptForNewClient:(id)sender
+{
+	return [[NewClientWindow alloc] init];
 }
 
 -(void)addClient:(id)sender
