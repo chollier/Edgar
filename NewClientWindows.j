@@ -29,8 +29,11 @@ var SharedClientWindow = nil;
 - (void)awakeFromCib
 {
 	console.log("new client window woke up");
-   SharedClientWindow = self;
+   	SharedClientWindow = self;
     [super awakeFromCib];
+
+	[datedenaissance displayPreset:1];
+	[datedenaissance setDelegate:self];
 //    [identifierField setValue:[CPColor grayColor] forThemeAttribute:"text-color" inState:CPTextFieldStatePlaceholder];
 }
 
@@ -101,6 +104,20 @@ var SharedClientWindow = nil;
         [self makeFirstResponder:nom];
     else
         [super sendEvent:anEvent];
+}
+
+-(void)datePickerValue:(id)sender
+{
+	//[theDatePicker setDate:[CPDate dateWithTimeIntervalSinceNow:9000000]];
+	//console.log([datedenaissance date]);
+}
+
+-(void)datePickerDidChange:(id)sender
+{
+	/*if([sender object] === theDatePicker){
+		[theDatePicker2 setMinDate: [theDatePicker date]];
+	}*/
+	//[self datePickerValue:sender];
 }
 
 @end
