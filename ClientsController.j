@@ -23,13 +23,6 @@
 	clients = [Client all];
 }
 
--(void)addClient
-{
-	client = [Client create:{"nom":"Vide"}];
-	[clients insertObject:client atIndex:0];
-	[[CPNotificationCenter defaultCenter] postNotificationName:@"ClientListDidUpdate" object:self];
-}
-
 -(Client)addClient:(id)aHash
 {
 	client = [Client create:aHash];
