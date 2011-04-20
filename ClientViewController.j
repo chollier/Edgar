@@ -1,3 +1,4 @@
+@import <Foundation/CPObject.j>
 @import <AppKit/CPButtonBar.j>
 @import "ClientView.j"
 @import "NewClientWindows.j"
@@ -22,6 +23,7 @@
 	}
 	
 	[[CPNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadListView:) name:@"ClientListDidUpdate" object:nil];
+	[[CPNotificationCenter defaultCenter] addObserver:self selector:@selector(addClient:) name:@"ClientAdded" object:nil];
 	
 	return self;
 }
@@ -57,8 +59,8 @@
 	
 
 	[clientListView setIntercellSpacing:CGSizeMakeZero()];
-	[clientListView setHeaderView:nil]
-	[clientListView setCornerView:nil]
+	[clientListView setHeaderView:nil];
+	[clientListView setCornerView:nil];
 
 /*	var column = [[CPTableColumn alloc] initWithIdentifier:"clientlist"];
 	[[column headerView] setStringValue:"Clients"];
@@ -73,8 +75,8 @@
 	[clientListView setColumnAutoresizingStyle:CPTableViewLastColumnOnlyAutoresizingStyle];
 	[clientListView setRowHeight:26.0];
 	
-	[clientListView setDelegate:self]
-	[clientListView setDataSource:self]
+	[clientListView setDelegate:self];
+	[clientListView setDataSource:self];
 	
 	[clientListView setSelectionHighlightStyle:CPTableViewSelectionHighlightStyleSourceList];
 /*	[clientListView setVerticalMotionCanBeginDrag:YES];*/
@@ -93,16 +95,11 @@
 	[clientWindow makeKeyAndOrderFront:self];
 }
 
--(void)addClient:(id)aClient
+-(void)addClient:(id)sender
 {
-	[self addClient:aClient shouldSelect:YES];
-}
-
--(void)addClient:(id)aClient select:(BOOL)shouldSelect
-{
-	if(!aClient) return;
 	
-	[clientListView reloadData];
+	[self setSelectedContactIndex:([[controller clients] count]-1)];
+		
 }
 
 -(void)removeClient:(id)sender
@@ -125,7 +122,7 @@
 
 -(void)setSelectedContactIndex:(int)anIndex
 {
-	[clientListView selectedRowIndexed:[CPIndexSet indexSetWithIndex:anIndex] byExtendingSelection:NO];
+	[clientListView selectRowIndexes:[CPIndexSet indexSetWithIndex:anIndex] byExtendingSelection:NO];
 	[clientListView scrollRowToVisible:anIndex];
 }
 

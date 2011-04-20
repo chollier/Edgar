@@ -72,8 +72,10 @@ var SharedClientWindow = nil;
 		//sale
 		clientController = [[ClientsController alloc] init];
 		
-		client = [clientController addClient:{"nom":[nom stringValue], "prenom":[prenom stringValue], "datedenaissance":[datedenaissance date], "telephone":[telephone stringValue], "email":[email stringValue], "adresse":[adresse stringValue], "codepostal":[codepostal intValue], "ville":[ville stringValue], "notes_memo":@"blah", "alias":[[nom stringValue] stringByAppendingString:[prenom stringValue]], "password":@"lol"}];
-		//console.log("we're ok");
+		client = [clientController addClient:{"nom":[nom stringValue], "prenom":[prenom stringValue], "anniversaire":[[datedenaissance date] toDateString], "telephone":[telephone stringValue], "email":[email stringValue], "adresse":[adresse stringValue], "codepostal":[codepostal intValue], "ville":[ville stringValue], "notes_memo":@"blah", "alias":[[nom stringValue] stringByAppendingString:[prenom stringValue]], "password":@"lol"}];
+
+		[[CPNotificationCenter defaultCenter] postNotificationName:@"ClientAdded" object:nil];
+		
 		
 		[self orderOut:self]
 	} else

@@ -27,7 +27,11 @@
 {
 	client = [Client create:aHash];
 	[clients insertObject:client atIndex:0];
-	[[CPNotificationCenter defaultCenter] postNotificationName:@"ClientListDidUpdate" object:self];
+	
+	[[CPNotificationCenter defaultCenter] postNotificationName:@"ClientListDidUpdate"
+                                                        object:self];
+
+	return client;
 }
 
 - (void)removeClientAtIndex:(int)anIndex
