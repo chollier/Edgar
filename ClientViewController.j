@@ -46,12 +46,13 @@
 	[minusButton setTarget:self];
 	[minusButton setEnabled:YES];
 	
-	var reloadButton = [CPButtonBar minusButton];
+/*	var reloadButton = [CPButtonBar minusButton];
 	[reloadButton setAction:@selector(reloadListView:)];
 	[reloadButton setTarget:self];
 	[reloadButton setEnabled:YES];
-	
-	[buttonBar setButtons:[addButton, minusButton, reloadButton]];
+	*/
+/*	[buttonBar setButtons:[addButton, minusButton, reloadButton]];*/
+	[buttonBar setButtons:[addButton, minusButton]];
 	[buttonBar setHasResizeControl:NO];	
 	
 
@@ -106,6 +107,14 @@
 
 -(void)removeClient:(id)sender
 {
+	previousSelected = [self selectedClientIndex];
+	
+	[controller removeClientAtIndex:previousSelected];
+	
+	[clientListView reloadData];
+	
+	//TODO : faire en sorte que ça selectionne qqchose ou afficher la noClientView
+	//[self setSelectedContactIndex:previousSelected-1];
 	
 }
 
