@@ -45,8 +45,15 @@
 	[minusButton setAction:@selector(removeClient:)];
 	[minusButton setTarget:self];
 	[minusButton setEnabled:YES];
-	[buttonBar setButtons:[addButton, minusButton]];
+	
+	var reloadButton = [CPButtonBar minusButton];
+	[reloadButton setAction:@selector(reloadListView:)];
+	[reloadButton setTarget:self];
+	[reloadButton setEnabled:YES];
+	
+	[buttonBar setButtons:[addButton, minusButton, reloadButton]];
 	[buttonBar setHasResizeControl:NO];	
+	
 
 	[clientListView setIntercellSpacing:CGSizeMakeZero()];
 	[clientListView setHeaderView:nil]
@@ -85,9 +92,16 @@
 	[clientWindow makeKeyAndOrderFront:self];
 }
 
--(void)addClient:(id)sender
+-(void)addClient:(id)aClient
 {
+	[self addClient:aClient shouldSelect:YES];
+}
+
+-(void)addClient:(id)aClient select:(BOOL)shouldSelect
+{
+	if(!aClient) return;
 	
+	[clientListView reloadData];
 }
 
 -(void)removeClient:(id)sender
@@ -119,9 +133,9 @@
 
 -(void)reloadListView:(id)sender
 {
-	[listView reloadData];
+	[controller getClients];
 	
-	[self setNeedsDisplay:YES];
+	[clientListView reloadData];	
 }
 
 

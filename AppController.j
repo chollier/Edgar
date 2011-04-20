@@ -21,7 +21,7 @@
     @outlet CPWindow    theWindow; //this "outlet" is connected automatically by the Cib
 	//CPViewController mainViewController;
 	ClientViewController theClientViewController;
-	ClientsController theClientController;
+	@outlet ClientsController theClientController;
 	AgenceViewController theAgenceViewController;
 }
 

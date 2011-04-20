@@ -10,7 +10,7 @@
 	CPText adresse @accessors;
 	CPNumber codepostal @accessors;
 	CPString ville @accessors;
-	CPText notes @accessors;
+	CPText notes_memo @accessors;
 	CPString alias @accessors;
 	CPString password @accessors;
 	
@@ -30,7 +30,7 @@
 			"adresse":adresse,
 			"codepostal":codepostal,
 			"ville":ville,
-			"notes":notes,
+			"notes_memo":notes_memo,
 			"alias":alias,
 			"password":password,
 			"created_at":[created_at toDateString],

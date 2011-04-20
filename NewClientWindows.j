@@ -1,5 +1,6 @@
 @import <Foundation/CPObject.j>
 @import "DatePicker/DatePicker.j"
+@import "ClientsController.j"
 
 var SharedClientWindow = nil;
 
@@ -19,6 +20,8 @@ var SharedClientWindow = nil;
 
     @outlet CPButton    addButton;
     @outlet CPButton    cancelButton;
+
+	//@outlet ClientController clientController;
 }
 
 + (id)sharedNewClientWindow
@@ -56,12 +59,27 @@ var SharedClientWindow = nil;
 {
     [super orderFront:sender];
     [nom setStringValue:""];
-    [addButton setEnabled:NO];
+    //[addButton setEnabled:NO];
 }
 
 -(@action)addButtonPressed:(id)sender 
 {
 	console.log("add pressed");
+	
+	if ([[nom stringValue] length] != 0 && [[prenom stringValue] length] != 0 && [datedenaissance date] != nil && [[telephone stringValue] length] != 0 && [[email stringValue] length] != 0 && [[adresse stringValue] length] != 0 && [[codepostal stringValue] length] != 0 && [[ville stringValue] length] != 0)
+	{
+		console.log([[datedenaissance date] toDateString]);
+		//sale
+		clientController = [[ClientsController alloc] init];
+		
+		client = [clientController addClient:{"nom":[nom stringValue], "prenom":[prenom stringValue], "datedenaissance":[datedenaissance date], "telephone":[telephone stringValue], "email":[email stringValue], "adresse":[adresse stringValue], "codepostal":[codepostal intValue], "ville":[ville stringValue], "notes_memo":@"blah", "alias":[[nom stringValue] stringByAppendingString:[prenom stringValue]], "password":@"lol"}];
+		//console.log("we're ok");
+		
+		[self orderOut:self]
+	} else
+	{
+		console.log("we're not ok");
+	}
 }
 
 /*- (@action)addRepository:(id)sender
@@ -100,9 +118,9 @@ var SharedClientWindow = nil;
 
 - (void)sendEvent:(CPEvent)anEvent
 {
-    if ([anEvent type] === CPKeyUp && [anEvent keyCode] === CPTabKeyCode)
-        [self makeFirstResponder:nom];
-    else
+/*    if ([anEvent type] === CPKeyUp && [anEvent keyCode] === CPTabKeyCode)
+      //  [self makeFirstResponder:nom];
+    else*/
         [super sendEvent:anEvent];
 }
 
